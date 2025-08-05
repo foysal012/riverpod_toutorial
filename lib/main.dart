@@ -4,6 +4,7 @@ import 'day_1/home_stateful_screen.dart';
 import 'day_1/home_stateless_screen.dart';
 import 'day_2/counter_stateful_screen.dart';
 import 'day_2/counter_stateless_screen.dart';
+import 'day_3/slider_home_stateless_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
         // home: HomeStatelessScreen(),
         // home: HomeStatefulScreen(),
         // home: CounterStatelessScreen(),
-        home: CounterStatefulScreen(),
+        // home: CounterStatefulScreen(),
+        home: SliderHomeSateLessScreen(),
       ),
     );
   }
