@@ -14,32 +14,24 @@ class HomeStatelessScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final tempName = ref.watch(name);
     final tempAge = ref.watch(age);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Stateless Screen'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Home Stateless Screen'), centerTitle: true),
 
       body: Container(
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('$tempName',
-            style: TextStyle(
-              fontSize: 18,
-            fontWeight: FontWeight.bold,
+            Text(
+              tempName,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            ),
-            Text('$tempAge',
-            style: TextStyle(
-              fontSize: 16,
-            fontWeight: FontWeight.w500,
-            ),
+            Text(
+              '$tempAge',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ],
         ),
