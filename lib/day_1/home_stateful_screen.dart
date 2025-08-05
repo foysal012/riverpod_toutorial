@@ -27,33 +27,24 @@ class _HomeStatefulScreenState extends ConsumerState<HomeStatefulScreen> {
     final tempAge = ref.watch(age);
     final tempGender = ref.watch(gender);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home Stateful Screen'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text('Home Stateful Screen'), centerTitle: true),
 
       body: Container(
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(tempName,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+            Text(
+              tempName,
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text('$tempAge',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+            Text(
+              '$tempAge',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            Text(tempGender,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-              ),
+            Text(
+              tempGender,
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
           ],
         ),
