@@ -11,8 +11,6 @@ class SliderHomeStatefulScreen extends ConsumerStatefulWidget {
 
 class _SliderHomeStatefulScreenState extends ConsumerState<SliderHomeStatefulScreen> {
 
-  // double sliderValue = 0.1;
-
   @override
   Widget build(BuildContext context) {
 
