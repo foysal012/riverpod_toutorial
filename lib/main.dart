@@ -6,6 +6,7 @@ import 'day_2/counter_stateful_screen.dart';
 import 'day_2/counter_stateless_screen.dart';
 import 'day_3/slider_home_stateless_screen.dart';
 import 'day_3/slider_home_stateful_screen.dart';
+import 'day_4/search_home_stateful_screen.dart';
 import 'day_4/search_home_stateless_screen.dart';
 
 void main() {
@@ -30,7 +31,8 @@ class MyApp extends StatelessWidget {
         // home: CounterStatefulScreen(),
         // home: SliderHomeSateLessScreen(),
         // home: SliderHomeStatefulScreen(),
-        home: SearchHomeStatelessScreen(),
+        // home: SearchHomeStatelessScreen(),
+        home: SearchHomeStatefulScreen(),
       ),
     );
   }
