@@ -13,7 +13,7 @@ class SliderHomeSateLessScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Slider App (Stateful)'),
+        title: Text('Slider App (Stateless)'),
         centerTitle: true,
         backgroundColor: Colors.cyan,
       ),
@@ -29,15 +29,15 @@ class SliderHomeSateLessScreen extends ConsumerWidget {
             Consumer(
               builder: (context, ref, child) {
 
-                final sliderValue = ref.watch(sliderProvider);
+                final sliderValue = ref.watch(sliderProvider.select((value) => value.isShowButton));
                 debugPrint('build4: ${DateTime.now().second}');
 
                 return IconButton(
                     onPressed: () {
                       final stateProvider = ref.read(sliderProvider.notifier);
-                      stateProvider.state = stateProvider.state.copyWith(isShowButton: !sliderValue.isShowButton);
+                      stateProvider.state = stateProvider.state.copyWith(isShowButton: !sliderValue);
                     },
-                    icon: Icon(sliderValue.isShowButton? Icons.visibility : Icons.visibility_off, size: 50)
+                    icon: Icon(sliderValue? Icons.visibility : Icons.visibility_off, size: 50)
                 );
               }
             ),
@@ -45,11 +45,11 @@ class SliderHomeSateLessScreen extends ConsumerWidget {
             // Color Container
             Consumer(builder: (context, ref, child) {
               
-              final sliderValue = ref.watch(sliderProvider);
+              final sliderValue = ref.watch(sliderProvider.select((value) => value.sliderDoubleValue));
               debugPrint('build2: ${DateTime.now().second}');
               
               return Opacity(
-                opacity: sliderValue.sliderDoubleValue,
+                opacity: sliderValue,
                 child: Container(
                   height: 200,
                   width: 200,
@@ -64,11 +64,11 @@ class SliderHomeSateLessScreen extends ConsumerWidget {
             // Slider Controller
             Consumer(builder: (context, ref, child) {
 
-              final sliderValue = ref.watch(sliderProvider);
+              final sliderValue = ref.watch(sliderProvider.select((value) => value.sliderDoubleValue));
               debugPrint('build3: ${DateTime.now().second}');
               
               return Slider(
-                  value: sliderValue.sliderDoubleValue,
+                  value: sliderValue,
                   onChanged: (value){
                     // ref.read(sliderProvider.notifier).state.sliderDoubleValue = value;
                     final stateProvider = ref.read(sliderProvider.notifier);
