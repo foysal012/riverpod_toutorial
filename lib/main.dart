@@ -10,6 +10,7 @@ import 'day_4/search_home_stateful_screen.dart';
 import 'day_4/search_home_stateless_screen.dart';
 import 'day_5/todo_home_stateless_screen.dart';
 import 'day_5/todo_home_stateful_screen.dart';
+import 'day_6/favourite_home_stateless_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         // home: SearchHomeStatelessScreen(),
         // home: SearchHomeStatefulScreen(),
         // home: TodoHomeStatelessScreen(),
-        home: TodoHomeStatefulScreen(),
+        // home: TodoHomeStatefulScreen(),
+        home: FavouriteHomeStatelessScreen(),
       ),
     );
   }
