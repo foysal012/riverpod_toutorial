@@ -1,66 +1,69 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_toutorial/day_5/item_provider.dart';
+import 'item_provider.dart';
 
-class TodoHomeStatelessScreen extends ConsumerWidget {
-  TodoHomeStatelessScreen({super.key});
+class TodoHomeStatefulScreen extends ConsumerStatefulWidget {
+  const TodoHomeStatefulScreen({super.key});
+
+  @override
+  ConsumerState<TodoHomeStatefulScreen> createState() => _TodoHomeStatefulScreenState();
+}
+
+class _TodoHomeStatefulScreenState extends ConsumerState<TodoHomeStatefulScreen> {
 
   final TextEditingController nameController = TextEditingController();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-
-    // final item = ref.watch(itemProvider);
+  Widget build(BuildContext context) {
     debugPrint('build1: ${DateTime.now().second}');
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('ToDo App (Stateless)'),
+        title: Text('ToDo App (Stateful)'),
         centerTitle: true,
         backgroundColor: Colors.cyan[200],
       ),
 
       body: Container(
+        alignment: Alignment.center,
         padding: EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Name',
+            Text('Name',
                 style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
                 )
-                ),
-                SizedBox(height: 5.0),
+            ),
+            SizedBox(height: 5.0),
 
-                TextFormField(
-                  controller: nameController,
-                  decoration: InputDecoration(
+            TextFormField(
+              controller: nameController,
+              decoration: InputDecoration(
 
-                    enabledBorder: OutlineInputBorder(
+                  enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                       borderSide: BorderSide(
-                        color: Colors.cyan,
-                        width: 2.0
+                          color: Colors.cyan,
+                          width: 2.0
                       )
-                    ),
-
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                        borderSide: BorderSide(
-                            color: Colors.cyan,
-                            width: 2.0
-                        )
-                    )
                   ),
-                ),
-                SizedBox(height: 10.0),
 
-                Align(
+                  focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      borderSide: BorderSide(
+                          color: Colors.cyan,
+                          width: 2.0
+                      )
+                  )
+              ),
+            ),
+            SizedBox(height: 10.0),
+
+            Consumer(builder: (context, ref, child) {
+              debugPrint('build2: ${DateTime.now().second}');
+                return Align(
                   alignment: Alignment.center,
                   child: GestureDetector(
                     onTap: () {
@@ -68,43 +71,42 @@ class TodoHomeStatelessScreen extends ConsumerWidget {
                       nameController.clear();
                     },
                     child: Container(
-                      height: 40,
-                      width: 60,
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.cyan,
-                      ),
-                      child: Text('Add')),
+                        height: 40,
+                        width: 60,
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.cyan,
+                        ),
+                        child: Text('Add')),
                   ),
-                ),
-              ],
-            ),
+                );
+            }),
             SizedBox(height: 20.0),
 
             Text('All ToDo List:',
-              style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black
-              )
+                style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black
+                )
             ),
             SizedBox(height: 5.0),
 
             Expanded(
               child: Consumer(
-                builder: (context, ref, child) {
+                  builder: (context, ref, child) {
 
-                  final item = ref.watch(itemProvider);
-                  debugPrint('build2: ${DateTime.now().second}');
+                    final item = ref.watch(itemProvider);
+                    debugPrint('build3: ${DateTime.now().second}');
 
 
-                  if(item.isEmpty){
-                    return Center(child: Text('No data found'));
-                  }
+                    if(item.isEmpty){
+                      return Center(child: Text('No data found'));
+                    }
 
-                  return ListView.builder(
+                    return ListView.builder(
                       itemCount: item.length,
                       // physics: NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
@@ -116,8 +118,8 @@ class TodoHomeStatelessScreen extends ConsumerWidget {
                             width: 40,
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.cyan.shade200
+                                shape: BoxShape.circle,
+                                color: Colors.cyan.shade200
                             ),
                             child: Text('${index+1}',
                               style: TextStyle(
@@ -165,8 +167,8 @@ class TodoHomeStatelessScreen extends ConsumerWidget {
                           ),
                         );
                       },
-                  );
-                }
+                    );
+                  }
               ),
             )
           ],
