@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_toutorial/day_6/provider/favourite_provider.dart';
 
-class FavouriteHomeStatelessScreen extends StatelessWidget {
+import 'model/favourite_item_model.dart';
+
+class FavouriteHomeStatelessScreen extends ConsumerWidget {
   FavouriteHomeStatelessScreen({super.key});
 
+  final TextEditingController searchController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
 
   bool isFavouriteGroupValue = true;
@@ -10,7 +15,9 @@ class FavouriteHomeStatelessScreen extends StatelessWidget {
   bool noFavouriteValue = false;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    debugPrint('Build1 ${DateTime.now()}');
+    final favourite = ref.watch(favouriteProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Favourite App (Stateless)'),
@@ -23,7 +30,7 @@ class FavouriteHomeStatelessScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Name',
+            Text('Search',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
@@ -33,7 +40,10 @@ class FavouriteHomeStatelessScreen extends StatelessWidget {
             SizedBox(height: 5.0),
 
             TextFormField(
-              controller: nameController,
+              controller: searchController,
+              onChanged: (value) {
+                ref.read(favouriteProvider.notifier).searchItem(searchController.text);
+              },
               decoration: InputDecoration(
 
                   enabledBorder: OutlineInputBorder(
@@ -50,53 +60,209 @@ class FavouriteHomeStatelessScreen extends StatelessWidget {
                           color: Colors.cyan,
                           width: 2.0
                       )
-                  )
+                  ),
               ),
             ),
             SizedBox(height: 10.0),
 
-            Text('Favourite',
-                style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black
+            Expanded(
+                child:
+                favourite.allItem.isEmpty?
+                    Center(child: Text('No data found')):
+                ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: favourite.allItem.length,
+                    itemBuilder: (context, index) {
+                      final dataInfo = favourite.allItem[index];
+                      return ListTile(
+                        leading: Container(
+                            height: 40,
+                            width: 40,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(10.0),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20.0),
+                              color: Colors.indigo[200],
+                            ),
+                            child: Text('${index+1}',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold
+                            ),
+                            )
+                        ),
+
+                        title: Text('${dataInfo.name}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold
+                          ),
+                        ),
+
+                          trailing: Icon(
+                              dataInfo.isFavourite == true ? Icons.favorite :
+                              Icons.favorite_border,
+                              color: dataInfo.isFavourite == true ?
+                              Colors.cyan : Colors.indigo[200]
+                        )
+                      );
+                    },
                 )
-            ),
-            SizedBox(height: 5.0),
-            Row(
-              children: [
-                Row(
-                  children: [
-                    Radio(
-                        value: yseFavouriteValue,
-                        groupValue: isFavouriteGroupValue,
-                        onChanged: (value) {
-                          isFavouriteGroupValue = value??false;
-                        },
-                    ),
-
-                    Text('Yes')
-                  ],
-                ),
-
-                Row(
-                  children: [
-                    Radio(
-                      value: noFavouriteValue,
-                      groupValue: isFavouriteGroupValue,
-                      onChanged: (value) {
-                        isFavouriteGroupValue = value??false;
-                      },
-                    ),
-
-                    Text('No')
-                  ],
-                )
-              ],
             )
-
           ],
         ),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Added item form'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                            child: Icon(
+                                Icons.close,
+                                color: Colors.red
+                            )
+                        )
+                      ],
+                    ),
+                    content: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text('Name',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black
+                            )
+                        ),
+                        SizedBox(height: 5.0),
+
+                        TextFormField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.cyan,
+                                      width: 2.0
+                                  )
+                              ),
+
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  borderSide: BorderSide(
+                                      color: Colors.cyan,
+                                      width: 2.0
+                                  )
+                              )
+                          ),
+                        ),
+                        SizedBox(height: 10.0),
+
+                        Text('Favourite',
+                            style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black
+                            )
+                        ),
+                        SizedBox(height: 5.0),
+
+                        Row(
+                          children: [
+                            Row(
+                              children: [
+                                Radio(
+                                  value: yseFavouriteValue,
+                                  groupValue: isFavouriteGroupValue,
+                                  onChanged: (value) {
+                                    isFavouriteGroupValue = value??false;
+                                  },
+                                ),
+
+                                Text('Yes')
+                              ],
+                            ),
+
+                            Row(
+                              children: [
+                                Radio(
+                                  value: noFavouriteValue,
+                                  groupValue: isFavouriteGroupValue,
+                                  onChanged: (value) {
+                                    isFavouriteGroupValue = value??false;
+                                  },
+                                ),
+
+                                Text('No')
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+
+                    actions: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          height: 42,
+                          width: 100,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.red,
+                          ),
+                          child: Text('Cancel'),
+                        ),
+                      ),
+                      SizedBox(width: 5.0),
+
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                          ref.read(favouriteProvider.notifier).addItem(
+                              dataModel: FavouriteItemModel(
+                                isFavourite: isFavouriteGroupValue,
+                                name: nameController.text,
+                                id: DateTime.now().toString(),
+                              )
+                          );
+                          nameController.clear();
+                          isFavouriteGroupValue = true;
+                        },
+                        child: Container(
+                          height: 42,
+                          width: 100,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: Colors.green,
+                          ),
+                          child: Text('Add'),
+                        ),
+                      )
+                    ],
+                  );
+                },
+            );
+          },
+          child: Icon(Icons.add)
       ),
     );
   }
