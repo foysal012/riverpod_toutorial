@@ -7,17 +7,19 @@ final favouriteProvider = StateNotifierProvider<FavouriteNotifier, FavouriteSate
 });
 
 class FavouriteNotifier extends StateNotifier<FavouriteSate>{
-  FavouriteNotifier(): super(FavouriteSate(allItem: [], favouriteItem: [], searchQuery: ''));
+  FavouriteNotifier(): super(FavouriteSate(allItem: [], favouriteItem: [], searchQuery: '', isGroupValue: false));
 
+  // Add
   void addItem({required FavouriteItemModel dataModel}){
-    List<FavouriteItemModel> dataList = [];
-    dataList.add(dataModel);
     state.allItem.add(dataModel);
     state = state.copyWith(allItem: state.allItem, favouriteItem: state.allItem);
   }
 
+  // Search
   void searchItem(String searchQuery){
-    state = state.copyWith(allItem: _searchItem(state.allItem , searchQuery), favouriteItem: _searchItem(state.allItem , searchQuery));
+    state = state.copyWith(
+        favouriteItem: _searchItem(state.allItem , searchQuery)
+    );
   }
 
   _searchItem(List<FavouriteItemModel> allItemList, String searchString){
@@ -28,8 +30,23 @@ class FavouriteNotifier extends StateNotifier<FavouriteSate>{
     }
   }
 
-  void filterItem(){
+  // Filter
+  void filterItem(String value){
+    state = state.copyWith(favouriteItem: _filterItem(state.allItem, value));
+  }
 
+  _filterItem(List<FavouriteItemModel> allList, String filteredKey){
+    if(filteredKey == 'All'){
+      return allList;
+    } else {
+      return allList.where((element) => element.isFavourite == true).toList();
+    }
+  }
+
+  void changeGroupValue(bool isGroupValue1){
+    state = state.copyWith(
+      isGroupValue: isGroupValue1
+    );
   }
 
 }
