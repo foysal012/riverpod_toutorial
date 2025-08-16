@@ -20,8 +20,16 @@ class _FavouriteHomeStatefulScreenState extends ConsumerState<FavouriteHomeState
   bool noFavouriteValue = false;
 
   @override
+  void dispose() {
+    searchController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     debugPrint('Build1 ${DateTime.now()}');
+    // final favourite = ref.watch(favouriteProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Favourite App (Stateful)'),

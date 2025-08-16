@@ -5,21 +5,18 @@ class FavouriteSate {
   List<FavouriteItemModel> allItem;
   List<FavouriteItemModel> favouriteItem;
   String searchQuery;
-  bool isGroupValue;
 
   FavouriteSate({
     required this.allItem,
     required this.favouriteItem,
-    required this.searchQuery,
-    required this.isGroupValue,
+    required this.searchQuery
   });
 
-  FavouriteSate copyWith({List<FavouriteItemModel>? allItem, List<FavouriteItemModel>? favouriteItem, String? searchQuery, bool? isGroupValue}){
+  FavouriteSate copyWith({List<FavouriteItemModel>? allItem, List<FavouriteItemModel>? favouriteItem, String? searchQuery,}){
     return FavouriteSate(
     allItem: allItem ?? this.allItem,
     favouriteItem: favouriteItem ?? this.favouriteItem,
     searchQuery: searchQuery ?? this.searchQuery,
-    isGroupValue: isGroupValue ?? this.isGroupValue
     );
   }
 }

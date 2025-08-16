@@ -7,7 +7,7 @@ final favouriteProvider = StateNotifierProvider<FavouriteNotifier, FavouriteSate
 });
 
 class FavouriteNotifier extends StateNotifier<FavouriteSate>{
-  FavouriteNotifier(): super(FavouriteSate(allItem: [], favouriteItem: [], searchQuery: '', isGroupValue: false));
+  FavouriteNotifier(): super(FavouriteSate(allItem: [], favouriteItem: [], searchQuery: ''));
 
   // Add
   void addItem({required FavouriteItemModel dataModel}){
@@ -41,12 +41,6 @@ class FavouriteNotifier extends StateNotifier<FavouriteSate>{
     } else {
       return allList.where((element) => element.isFavourite == true).toList();
     }
-  }
-
-  void changeGroupValue(bool isGroupValue1){
-    state = state.copyWith(
-      isGroupValue: isGroupValue1
-    );
   }
 
 }
