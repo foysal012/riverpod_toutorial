@@ -126,7 +126,7 @@ class _FavouriteHomeStatefulScreenState extends ConsumerState<FavouriteHomeState
                                   )
                               ),
 
-                              title: Text('${dataInfo.name}',
+                              title: Text(dataInfo.name,
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,

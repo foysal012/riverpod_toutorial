@@ -53,7 +53,7 @@ class _CounterStatefulScreenState extends ConsumerState<CounterStatefulScreen> {
                   debugPrint('build2: ${DateTime.now().second}');
 
                   return
-                    Text('${tempCounter}',
+                    Text('$tempCounter',
                       style: TextStyle(
                           fontSize: 25,
                           color: Colors.black,

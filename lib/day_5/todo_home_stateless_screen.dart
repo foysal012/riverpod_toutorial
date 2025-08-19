@@ -128,7 +128,7 @@ class TodoHomeStatelessScreen extends ConsumerWidget {
                             ),
                           ),
 
-                          title: Text('${itemData.name}',
+                          title: Text(itemData.name,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -136,7 +136,7 @@ class TodoHomeStatelessScreen extends ConsumerWidget {
                             ),
                           ),
 
-                          subtitle: Text('${itemData.id}',
+                          subtitle: Text(itemData.id,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,

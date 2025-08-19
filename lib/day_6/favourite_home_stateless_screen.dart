@@ -114,7 +114,7 @@ class FavouriteHomeStatelessScreen extends ConsumerWidget {
                                 )
                             ),
 
-                            title: Text('${dataInfo.name}',
+                            title: Text(dataInfo.name,
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black,
