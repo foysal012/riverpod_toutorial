@@ -130,7 +130,7 @@ class _TodoHomeStatefulScreenState extends ConsumerState<TodoHomeStatefulScreen>
                             ),
                           ),
 
-                          title: Text('${itemData.name}',
+                          title: Text(itemData.name,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.bold,
@@ -138,7 +138,7 @@ class _TodoHomeStatefulScreenState extends ConsumerState<TodoHomeStatefulScreen>
                             ),
                           ),
 
-                          subtitle: Text('${itemData.id}',
+                          subtitle: Text(itemData.id,
                             style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.normal,

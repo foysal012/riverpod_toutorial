@@ -12,8 +12,9 @@ import 'day_5/todo_home_stateless_screen.dart';
 import 'day_5/todo_home_stateful_screen.dart';
 import 'day_6/favourite_home_stateless_screen.dart';
 import 'day_6/favourite_home_stateful_screen.dart';
-import 'day_7/future_stateful_home_screen.dart';
 import 'day_7/future_stateless_home_screen.dart';
+import 'day_7/future_stateful_home_screen.dart';
+import 'day_8/stream_stateless_home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,7 +45,8 @@ class MyApp extends StatelessWidget {
         // home: FavouriteHomeStatelessScreen(),
         // home: FavouriteHomeStatefulScreen(),
         // home: FutureStatelessHomeScreen(),
-        home: FutureStatefulHomeScreen(),
+        // home: FutureStatefulHomeScreen(),
+        home: StreamStatelessHomeScreen(),
       ),
     );
   }

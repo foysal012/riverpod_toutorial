@@ -68,7 +68,7 @@ class _SearchHomeStatefulScreenState extends ConsumerState<SearchHomeStatefulScr
                   final searchString = ref.watch(searchProvider.select((value) => value.searchValue));
                   debugPrint('build3: ${DateTime.now().second}');
 
-                  return Text('${searchString}');
+                  return Text(searchString);
                 })
           ],
         ),

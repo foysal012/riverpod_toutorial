@@ -38,7 +38,7 @@ class CounterStatelessScreen extends ConsumerWidget {
                   final tempCounter = ref.watch(counter);
                   debugPrint('build2: ${DateTime.now().second}');
 
-                  return Text('${tempCounter}',
+                  return Text('$tempCounter',
                     style: TextStyle(
                         fontSize: 25,
                         color: Colors.black,
