@@ -31,7 +31,7 @@ class StreamStatelessHomeScreen extends ConsumerWidget {
               children: [
                 streamProviderValue.when(
                     data: (data) {
-                      return Text('${data}');
+                      return Text('$data');
                     },
                     error: (error, stackTrace) => Text('Error is ${error.toString()}'),
                     loading: () => CupertinoActivityIndicator()

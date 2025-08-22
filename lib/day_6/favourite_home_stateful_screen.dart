@@ -279,7 +279,7 @@ class _FavouriteHomeStatefulScreenState extends ConsumerState<FavouriteHomeState
                     Consumer(
                         builder: (context, ref, child) {
                           debugPrint('Build2 ${DateTime.now()}');
-                          final favourite = ref.watch(favouriteProvider);
+                          // final favourite = ref.watch(favouriteProvider);
                           return GestureDetector(
                             onTap: () {
                               Navigator.pop(context);
