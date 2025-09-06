@@ -18,7 +18,7 @@ class _StreamStatefulHomeScreenState extends ConsumerState<StreamStatefulHomeScr
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Stream Provider App (Stateless)'),
+        title: Text('Stream Provider App (Statefull)'),
         centerTitle: true,
         backgroundColor: Colors.indigo[200],
       ),
