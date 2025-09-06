@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_toutorial/day_10/family_stateless_home_screen.dart';
 import 'day_1/home_stateful_screen.dart';
 import 'day_1/home_stateless_screen.dart';
 import 'day_2/counter_stateful_screen.dart';
@@ -52,7 +53,8 @@ class MyApp extends StatelessWidget {
         // home: StreamStatelessHomeScreen(),
         // home: StreamStatefulHomeScreen(),
         // home: ApiSatelessHomeScreen(),
-        home: ApiStatefulHomeScreen(),
+        // home: ApiStatefulHomeScreen(),
+        home: FamilyStatelessHomeScreen(),
       ),
     );
   }
